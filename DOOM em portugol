@@ -1,0 +1,135 @@
+programa
+{
+	funcao inicio()
+	{
+		inteiro vida = 100
+		inteiro vida_inimigo = 50
+		inteiro municao = 10
+		inteiro kit_medico = 1
+		
+		cadeia arma = "pistola"
+		
+		logico inimigo_vivo = verdadeiro
+		logico inventario_aberto = falso
+		
+		inteiro opcao
+		
+		escreva("===== DOOM EM PORTUGOL =====\n")
+		
+		enquanto (vida > 0)
+		{
+			escreva("\nVida: ", vida)
+			escreva("\nArma atual: ", arma)
+			
+			se (inimigo_vivo)
+			{
+				escreva("\nInimigo presente!\n")
+			}
+			
+			escreva("\n1 - Atacar")
+			escreva("\n2 - Abrir inventário")
+			escreva("\n3 - Fugir")
+			escreva("\nEscolha: ")
+			
+			leia(opcao)
+			
+			
+			se (opcao == 1)
+			{
+				se (inimigo_vivo)
+				{
+					se (arma == "pistola")
+					{
+						se (municao > 0)
+						{
+							escreva("\nVocê atirou!\n")
+							municao--
+							vida_inimigo -= 25
+						}
+						senao
+						{
+							escreva("\nSem munição!\n")
+						}
+					}
+					
+					senao
+					{
+						escreva("\nAtaque com faca!\n")
+						vida_inimigo -= 10
+					}
+					
+					se (vida_inimigo <= 0)
+					{
+						escreva("\nInimigo derrotado!\n")
+						inimigo_vivo = falso
+					}
+					
+					senao
+					{
+						escreva("\nO inimigo te atacou!\n")
+						vida -= 10
+					}
+				}
+				
+				senao
+				{
+					escreva("\nNão há inimigos aqui.\n")
+				}
+			}
+			
+			
+			se (opcao == 2)
+			{
+				escreva("\n===== INVENTÁRIO =====\n")
+				escreva("1 - Equipar faca\n")
+				escreva("2 - Equipar pistola\n")
+				escreva("3 - Usar kit médico\n")
+				escreva("4 - Sair\n")
+				
+				leia(opcao)
+				
+				se (opcao == 1)
+				{
+					arma = "faca"
+					escreva("Faca equipada\n")
+				}
+				
+				se (opcao == 2)
+				{
+					arma = "pistola"
+					escreva("Pistola equipada\n")
+				}
+				
+				se (opcao == 3)
+				{
+					se (kit_medico > 0)
+					{
+						vida += 30
+						kit_medico--
+						escreva("Vida recuperada!\n")
+					}
+					
+					senao
+					{
+						escreva("Sem kit médico!\n")
+					}
+				}
+			}
+			
+			
+			se (opcao == 3)
+			{
+				escreva("\nVocê fugiu!\n")
+				pare
+			}
+		}
+		
+		
+		se (vida <= 0)
+		{
+			escreva("\nGAME OVER\n")
+		}
+		
+		escreva("\nFim do jogo\n")
+	}
+}
