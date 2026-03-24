@@ -1,0 +1,37 @@
+historico = []
+while True:
+    print("/n---- TREINO RUNNER ----")
+    print("1 - Calcular Pace")
+    print("2 - Ver historico")
+    print("3 - Sair")
+
+    opcao = input("Escolha uma opção: ")
+
+    distancia = float(input("digite a distância (em metros): "))
+    tempo = float(input("Digite o tempo (em segundos): "))
+
+    pace = tempo / (distancia / 1000)
+    print(f"Pace: {pace:.2f} segundos por km")
+
+    if opcao == "2" :
+        prova = input("Qual é a prova? (ex: 400m, 800m:) ")
+        tempo= float(input("Digite o tempo (em segundos): "))
+
+        registro = f"{prova} - {tempo}-s"
+        historico.append(registro)
+
+        print("Tempo registrado com perfeição! ")
+
+    elif opcao == "3" :
+         print("n/--- HISTORICO---")
+         if len(historico) == 0:
+             print("Nenhum registro ainda. ")
+         else:
+             for item in historico:
+                   print(item)
+    elif opcao == "0":
+        print("Saindo...")
+        break
+
+    else:
+         print("Opção inválida! Tente novamente." )
