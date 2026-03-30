@@ -3,133 +3,110 @@ programa
 	funcao inicio()
 	{
 		inteiro vida = 100
-		inteiro vida_inimigo = 50
 		inteiro municao = 10
-		inteiro kit_medico = 1
-		
+		inteiro kits = 3
+		inteiro mortes = 0
+		inteiro vida_inimigo = 50
+		inteiro opcao, item_mochila
 		cadeia arma = "pistola"
-		
-		logico inimigo_vivo = verdadeiro
-		logico inventario_aberto = falso
-		
-		inteiro opcao
-		
-		escreva("===== DOOM EM PORTUGOL =====\n")
-		
-		enquanto (vida > 0)
+		logico boss_ativo = falso
+
+		escreva("=== DOOM PORTUGOL ===\n")
+
+		// 2. Laço principal do jogo
+		enquanto (vida > 0 e mortes < 4)
 		{
-			escreva("\nVida: ", vida)
-			escreva("\nArma atual: ", arma)
-			
-			se (inimigo_vivo)
-			{
-				escreva("\nInimigo presente!\n")
-			}
-			
-			escreva("\n1 - Atacar")
-			escreva("\n2 - Abrir inventário")
-			escreva("\n3 - Fugir")
+			escreva("\n---------------------------------")
+			escreva("\nSUA VIDA: ", vida, " | ARMA: ", arma)
+			escreva("\nINIMIGO: ", vida_inimigo, " HP")
+			escreva("\n---------------------------------")
+			escreva("\n1 - ATACAR")
+			escreva("\n2 - MOCHILA")
+			escreva("\n3 - FUGIR")
 			escreva("\nEscolha: ")
-			
 			leia(opcao)
-			
-			
-			se (opcao == 1)
+
+			escolha (opcao)
 			{
-				se (inimigo_vivo)
-				{
-					se (arma == "pistola")
+				// --- ATACAR ---
+				caso 1:
+					se (arma == "pistola" e municao > 0)
 					{
-						se (municao > 0)
+						escreva("\n[POW!] Você atirou! -25 HP")
+						vida_inimigo = vida_inimigo - 25
+						municao = municao - 1
+					}
+					senao
+					{
+						escreva("\n[ZAP!] Ataque de faca! -10 HP")
+						vida_inimigo = vida_inimigo - 10
+					}
+
+					se (vida_inimigo > 0)
+					{
+						escreva("\nO inimigo te golpeou! -15 de vida.")
+						vida = vida - 15
+					}
+					senao
+					{
+						mortes = mortes + 1
+						escreva("\nInimigo eliminado!")
+						
+						se (mortes < 3)
 						{
-							escreva("\nVocê atirou!\n")
-							municao--
-							vida_inimigo -= 25
+							vida_inimigo = 50
+							escreva("\nUm novo demônio apareceu!")
 						}
-						senao
+						senao se (mortes == 3)
 						{
-							escreva("\nSem munição!\n")
+							vida_inimigo = 150
+							boss_ativo = verdadeiro
+							escreva("\n!!! O CHEFE FINAL CHEGOU !!!")
 						}
 					}
-					
-					senao
-					{
-						escreva("\nAtaque com faca!\n")
-						vida_inimigo -= 10
-					}
-					
-					se (vida_inimigo <= 0)
-					{
-						escreva("\nInimigo derrotado!\n")
-						inimigo_vivo = falso
-					}
-					
-					senao
-					{
-						escreva("\nO inimigo te atacou!\n")
-						vida -= 10
-					}
-				}
-				
-				senao
-				{
-					escreva("\nNão há inimigos aqui.\n")
-				}
-			}
-			
-			
-			se (opcao == 2)
-			{
-				escreva("\n===== INVENTÁRIO =====\n")
-				escreva("1 - Equipar faca\n")
-				escreva("2 - Equipar pistola\n")
-				escreva("3 - Usar kit médico\n")
-				escreva("4 - Sair\n")
-				
-				leia(opcao)
-				
-				se (opcao == 1)
-				{
-					arma = "faca"
-					escreva("Faca equipada\n")
-				}
-				
-				se (opcao == 2)
-				{
-					arma = "pistola"
-					escreva("Pistola equipada\n")
-				}
-				
-				se (opcao == 3)
-				{
-					se (kit_medico > 0)
-					{
-						vida += 30
-						kit_medico--
-						escreva("Vida recuperada!\n")
-					}
-					
-					senao
-					{
-						escreva("Sem kit médico!\n")
-					}
-				}
-			}
-			
-			
-			se (opcao == 3)
-			{
-				escreva("\nVocê fugiu!\n")
 				pare
+
+				// --- MENU MOCHILA ---
+				caso 2:
+					escreva("\n=== [ MOCHILA ] ===")
+					escreva("\n1 - Usar Kit Médico (Qtd: ", kits, ")")
+					escreva("\n2 - Equipar Pistola (Mun: ", municao, ")")
+					escreva("\n3 - Equipar Faca")
+					escreva("\n4 - Voltar")
+					escreva("\nEscolha: ")
+					leia(item_mochila)
+
+					se (item_mochila == 1)
+					{
+						se (kits > 0) {
+							vida = vida + 40
+							kits = kits - 1
+							escreva("\nVocê se curou!")
+						} senao { escreva("\nSem kits na mochila!") }
+					}
+					senao se (item_mochila == 2) { arma = "pistola" }
+					senao se (item_mochila == 3) { arma = "faca" }
+				pare
+
+				// --- FUGIR ---
+				caso 3:
+					escreva("\nVocê correu da batalha!")
+					vida = 0 // Encerra o jogo
+				pare
+
+				caso contrario:
+					escreva("\nOpção inválida!")
 			}
 		}
-		
-		
+
+		// --- FIM DO JOGO ---
 		se (vida <= 0)
 		{
-			escreva("\nGAME OVER\n")
+			escreva("\nGAME OVER. Você sucumbiu.")
 		}
-		
-		escreva("\nFim do jogo\n")
+		senao
+		{
+			escreva("\nVITÓRIA! Marte está segura novamente!")
+		}
 	}
 }
