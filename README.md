@@ -1,1 +1,1 @@
-https://takaiwebsite.neocities.org/minecraft
+# gustavovuaden-cmyk.github.io
