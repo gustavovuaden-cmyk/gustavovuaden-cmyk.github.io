@@ -1,37 +1,200 @@
-historico = []
-while True:
-    print("/n---- TREINO RUNNER ----")
-    print("1 - Calcular Pace")
-    print("2 - Ver historico")
-    print("3 - Sair")
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra a Suíça 🇨🇭</title>
 
-    opcao = input("Escolha uma opção: ")
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-    distancia = float(input("digite a distância (em metros): "))
-    tempo = float(input("Digite o tempo (em segundos): "))
+<style>
+:root {
+    --suica-vermelho: #d52b1e;
+    --suica-escuro: #2d3436;
+    --gelo: #f1f2f6;
+}
 
-    pace = tempo / (distancia / 1000)
-    print(f"Pace: {pace:.2f} segundos por km")
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    if opcao == "2" :
-        prova = input("Qual é a prova? (ex: 400m, 800m:) ")
-        tempo= float(input("Digite o tempo (em segundos): "))
+body {
+    background: var(--gelo);
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+}
 
-        registro = f"{prova} - {tempo}-s"
-        historico.append(registro)
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    url('https://images.unsplash.com/photo-1590309284223-3946577eb10e') center/cover fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-        print("Tempo registrado com perfeição! ")
+.hero h1 {
+    color: white;
+    font-size: clamp(3rem, 8vw, 5rem);
+    backdrop-filter: blur(6px);
+    padding: 15px 30px;
+    border-radius: 12px;
+}
 
-    elif opcao == "3" :
-         print("n/--- HISTORICO---")
-         if len(historico) == 0:
-             print("Nenhum registro ainda. ")
-         else:
-             for item in historico:
-                   print(item)
-    elif opcao == "0":
-        print("Saindo...")
-        break
+/* SEÇÕES */
+section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
 
-    else:
-         print("Opção inválida! Tente novamente." )
+h2 {
+    color: var(--suica-vermelho);
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.grid-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* GALERIA */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.galeria img:hover {
+    transform: scale(1.05);
+}
+
+/* LIGHTBOX */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85%;
+}
+
+/* FOOTER */
+footer {
+    background: var(--suica-escuro);
+    color: #bdc3c7;
+    text-align: center;
+    padding: 30px;
+}
+
+.highlight {
+    color: var(--suica-vermelho);
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1>Descubra a Suíça 🇨🇭</h1>
+</div>
+
+<section>
+<h2>Paisagens</h2>
+
+<div class="galeria">
+    <img src="https://images.unsplash.com/photo-1590309284223-3946577eb10e">
+    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+    <img src="https://images.unsplash.com/photo-1527668752968-14dc70a27c95">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b">
+</div>
+
+<p style="text-align:center; max-width:800px; margin:auto;">
+A Suíça é um dos países mais bonitos do mundo, com <span class="highlight">montanhas, lagos e vilarejos</span> que parecem de filme.
+</p>
+</section>
+
+<section style="background:white;">
+<h2>Sobre o País</h2>
+
+<div class="grid-info">
+    <div class="card">
+        <h3>💰 Economia</h3>
+        <p>Uma das economias mais fortes do mundo, com destaque em bancos, tecnologia e qualidade de vida.</p>
+    </div>
+
+    <div class="card">
+        <h3>🍫 Chocolate</h3>
+        <p>O chocolate suíço é famoso mundialmente pela qualidade e sabor incomparável.</p>
+    </div>
+
+    <div class="card">
+        <h3>🏔️ Turismo</h3>
+        <p>Destino incrível para quem gosta de natureza, neve e paisagens cinematográficas.</p>
+    </div>
+</div>
+</section>
+
+<div class="lightbox" id="lightbox">
+    <img id="lightbox-img">
+</div>
+
+<footer>
+    Explorando o melhor do mundo 🚀
+</footer>
+
+<script>
+const imgs = document.querySelectorAll(".galeria img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+imgs.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    });
+});
+
+lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+</script>
+
+</body>
+</html>
